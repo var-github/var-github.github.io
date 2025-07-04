@@ -6,14 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
+    html, body {
+      margin: 0; padding: 0; height: 100%;
       font-family: 'Inter', Arial, sans-serif;
       background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
       color: #2a4365;
-      height: 100vh;
-      min-height: 100vh;
-      width: 100vw;
+      overflow: hidden;
     }
     .nav {
       display: flex;
@@ -27,7 +25,9 @@
       width: 100%;
       max-width: 1200px;
       box-sizing: border-box;
-      margin: 3em auto 0 auto;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
     }
     .nav button {
       background: none;
@@ -47,29 +47,40 @@
     h1 {
       font-family: 'Montserrat', sans-serif;
       font-size: 2.2em;
-      margin: 1em 0 0.5em 0;
+      margin: 1em auto 1em auto;
       letter-spacing: 1px;
       text-shadow: 0 2px 12px rgba(44,62,80,0.06);
       text-align: center;
-      width: 100%;
       max-width: 1200px;
       box-sizing: border-box;
+      padding: 0 1em;
+    }
+    .wrapper {
+      background-color: #dbe9f4;
+      padding: 3em;
+      height: calc(100vh - 130px);
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 2em;
+      max-width: 100vw;
     }
     .card {
-      height: 90vh;
-      width: calc(90vh * (16 / 9));
-      max-width: 98vw;
-      min-width: 320px;
-      background: #e3f0fa; /* Soft blue background */
+      background: #fff;
       border-radius: 18px;
       box-shadow: 0 8px 40px rgba(44,62,80,0.13);
-      padding: 0.5em;
+      width: calc(100% - 60px);
+      max-width: 900px;
+      height: 100%;
+      max-height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      margin: 3em auto 3em auto; /* Increased margin */
-      transition: opacity 0.3s ease;
+      padding: 0.5em;
+      margin: 0;
     }
     .hide { display: none; }
     iframe {
@@ -89,6 +100,7 @@
       color: #2a4365;
       padding: 0 1em;
       width: 100%;
+      overflow-y: auto;
     }
   </style>
 </head>
@@ -98,13 +110,15 @@
     <button onclick="show('about', this)">About</button>
   </nav>
   <h1 id="main-title">Projects</h1>
-  <div class="card" id="projects">
-    <iframe src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
-  </div>
-  <div class="card hide" id="about">
-    <div class="card-content">
-      <strong>About</strong><br />
-      This is the About section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
+  <div class="wrapper">
+    <div class="card" id="projects">
+      <iframe src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
+    </div>
+    <div class="card hide" id="about">
+      <div class="card-content">
+        <strong>About</strong><br />
+        This is the About section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
+      </div>
     </div>
   </div>
   <script>
