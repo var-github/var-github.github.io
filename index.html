@@ -15,52 +15,76 @@
     .nav {
       display: flex;
       justify-content: center;
-      gap: 1em;
-      padding: 1em 0;
+      gap: 1.3em;
+      padding: 1.5em 0 1em 0;
+      background: transparent;
     }
     .nav button {
       background: none;
       border: none;
-      font: 600 1em 'Inter', sans-serif;
+      font: 600 1.1em 'Inter', sans-serif;
       color: #2a4365;
-      padding: 0.5em 1em;
-      border-radius: 7px;
+      padding: 0.6em 1.5em;
+      border-radius: 9px;
       cursor: pointer;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      letter-spacing: 0.02em;
     }
     .nav button.active,
     .nav button:hover {
-      background: #38b2ac;
+      background: linear-gradient(90deg, #38b2ac 60%, #63b3ed 100%);
       color: #fff;
+      box-shadow: 0 2px 12px #4299e11a;
     }
     h1 {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.7em;
-      margin: 0 0 1em;
+      font-size: 2.3em;
+      margin: 0 0 1.2em 0;
+      letter-spacing: 0.03em;
+      color: #2a4365;
+      text-shadow: 0 2px 10px #4299e11a;
     }
     .card {
       width: 100%;
-      max-width: 950px;
-      height: 650px;
-      margin: 1.2em auto; /* Reduced margin */
-      background: #f6faff;
-      border-radius: 14px;
-      box-shadow: 0 4px 20px #2c3e501a;
-      padding: 2em;
+      max-width: 1100px;
+      height: 720px;
+      margin: 1.5em auto 1.8em auto;
+      background: linear-gradient(110deg, #f6faff 70%, #eaf3fb 100%);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px #4299e11a, 0 1.5px 6px #38b2ac0d;
+      padding: 2.7em 2.2em;
       display: flex;
       flex-direction: column;
       justify-content: center;
       box-sizing: border-box;
+      transition: box-shadow 0.18s;
+    }
+    .card:focus-within,
+    .card:hover {
+      box-shadow: 0 12px 36px #4299e12b, 0 2px 12px #38b2ac1a;
     }
     .hide {
       display: none;
     }
     iframe {
       width: 100%;
-      height: 600px;
+      height: 670px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       background: #f1f5f9;
+      box-shadow: 0 2px 12px #38b2ac11;
+      transition: box-shadow 0.18s;
+    }
+    .card-content {
+      width: 100%;
+      text-align: center;
+      font-size: 1.32em;
+      color: #2a4365;
+      margin: auto;
+      letter-spacing: 0.01em;
+      line-height: 1.7;
+      padding: 1.2em 0.5em 0 0.5em;
     }
   </style>
 </head>
@@ -74,9 +98,9 @@
     <iframe src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
   </div>
   <div class="card hide" id="about">
-    <div style="text-align:center; margin:auto;">
+    <div class="card-content">
       <b>About</b><br>
-      This is the About section. Add your content here.
+      This is the About section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
     </div>
   </div>
   <script>
