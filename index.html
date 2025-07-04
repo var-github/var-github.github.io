@@ -1,5 +1,124 @@
-<html>
-  <body>
-    HI
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Projects</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
+      font-family: 'Inter', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(44,62,80,0.06);
+      padding: 1.2em 0 1em 0;
+      border-radius: 0 0 18px 18px;
+      margin-bottom: 2em;
+    }
+    nav button {
+      background: none;
+      border: none;
+      font-family: 'Inter', Arial, sans-serif;
+      font-weight: 600;
+      font-size: 1.1em;
+      color: #2a4365;
+      padding: 0.6em 1.5em;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      outline: none;
+    }
+    nav button.active, nav button:hover {
+      background: linear-gradient(90deg, #38b2ac 0%, #4299e1 100%);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(66,153,225,0.08);
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.7em;
+      text-align: center;
+      margin: 0 0 1.2em 0;
+      color: #2a4365;
+      letter-spacing: 1.5px;
+      text-shadow: 0 2px 12px rgba(44,62,80,0.04);
+    }
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 60vh;
+    }
+    .section {
+      display: none;
+      width: 100%;
+      max-width: 720px;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 8px 40px rgba(44,62,80,0.13);
+      border-radius: 18px;
+      padding: 2.2em 2em 2em 2em;
+      margin-bottom: 2em;
+      backdrop-filter: blur(7px);
+      animation: fadeIn 0.5s;
+    }
+    .section.active {
+      display: block;
+    }
+    iframe {
+      width: 100%;
+      height: 420px;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(56,178,172,0.10);
+      background: #f1f5f9;
+      margin-top: 1em;
+      transition: box-shadow 0.2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 800px) {
+      .container { padding: 0 1em; }
+      .section { padding: 1.2em 0.7em; }
+      h1 { font-size: 2em; }
+      iframe { height: 260px; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button class="active" onclick="showSection('projects')">Projects</button>
+    <button onclick="showSection('about')">About</button>
+    <button onclick="showSection('contact')">Contact</button>
+  </nav>
+  <h1>Projects</h1>
+  <div class="container">
+    <div id="projects" class="section active">
+      <iframe src="https://varun-sudoku-solver.streamlit.app/" title="Embedded Site"></iframe>
+    </div>
+    <div id="about" class="section">
+      <p style="font-size:1.1em; color:#2a4365;">This is the <b>About</b> section. Add your content here.</p>
+    </div>
+    <div id="contact" class="section">
+      <p style="font-size:1.1em; color:#2a4365;">This is the <b>Contact</b> section. Add your content here.</p>
+    </div>
+  </div>
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      const idx = ['projects','about','contact'].indexOf(id);
+      document.querySelectorAll('nav button')[idx].classList.add('active');
+      document.querySelector('h1').textContent = id.charAt(0).toUpperCase() + id.slice(1);
+    }
+  </script>
+</body>
 </html>
