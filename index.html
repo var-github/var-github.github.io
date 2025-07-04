@@ -6,15 +6,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { margin:0; font-family:'Inter',Arial,sans-serif; background:#f8fafc; color:#2a4365;}
-    .nav { display:flex; justify-content:center; gap:1em; padding:1em 0;}
-    .nav button { background:none; border:none; font:600 1em 'Inter',sans-serif; color:#2a4365; padding:0.5em 1em; border-radius:7px; cursor:pointer;}
-    .nav button.active, .nav button:hover { background:#38b2ac; color:#fff;}
-    h1 { text-align:center; font-family:'Montserrat',sans-serif; font-size:1.7em; margin:0 0 1em;}
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f8fafc;
+      color: #2a4365;
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      padding: 1em 0;
+    }
+    .nav button {
+      background: none;
+      border: none;
+      font: 600 1em 'Inter', sans-serif;
+      color: #2a4365;
+      padding: 0.5em 1em;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    .nav button.active,
+    .nav button:hover {
+      background: #38b2ac;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.7em;
+      margin: 0 0 1em;
+    }
     .card {
       width: 100%;
       max-width: 900px;
-      height: 420px; /* Fixed height for both cards */
+      height: 600px;
       margin: auto;
       background: #fff;
       border-radius: 12px;
@@ -25,11 +52,15 @@
       justify-content: center;
       box-sizing: border-box;
     }
-    .hide { display:none; }
-    iframe { width:100%; height:400px; border:none; border-radius:8px; background:#f1f5f9;}
-    @media (max-width:600px) {
-      .card { padding:1em; height:220px; }
-      iframe { height:200px; }
+    .hide {
+      display: none;
+    }
+    iframe {
+      width: 100%;
+      height: 550px;
+      border: none;
+      border-radius: 8px;
+      background: #f1f5f9;
     }
   </style>
 </head>
@@ -50,10 +81,14 @@
   </div>
   <script>
     function show(id, btn) {
-      ['projects','about'].forEach(s =>
-        document.getElementById(s).classList.toggle('hide', s !== id));
-      document.getElementById('main-title').textContent = id.charAt(0).toUpperCase() + id.slice(1);
-      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      ['projects', 'about'].forEach(s =>
+        document.getElementById(s).classList.toggle('hide', s !== id)
+      );
+      document.getElementById('main-title').textContent =
+        id.charAt(0).toUpperCase() + id.slice(1);
+      document.querySelectorAll('.nav button').forEach(b =>
+        b.classList.remove('active')
+      );
       btn.classList.add('active');
     }
   </script>
