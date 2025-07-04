@@ -16,8 +16,7 @@
       display: flex;
       justify-content: center;
       gap: 1.3em;
-      padding: 1.5em 0 1em 0;
-      background: transparent;
+      padding: 1.5em 0 1em;
     }
     .nav button {
       background: none;
@@ -27,42 +26,32 @@
       padding: 0.6em 1.5em;
       border-radius: 9px;
       cursor: pointer;
-      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
-      letter-spacing: 0.02em;
     }
     .nav button.active,
     .nav button:hover {
-      background: linear-gradient(90deg, #38b2ac 60%, #63b3ed 100%);
-      color: #fff;
-      box-shadow: 0 2px 12px #4299e11a;
+      background: linear-gradient(90deg, #f6e27a 60%, #ffe9b2 100%);
+      color: #2a4365;
     }
     h1 {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
       font-size: 2.3em;
-      margin: 0 0 1.2em 0;
+      margin: 0 0 1.2em;
       letter-spacing: 0.03em;
       color: #2a4365;
-      text-shadow: 0 2px 10px #4299e11a;
     }
     .card {
       width: 100%;
       max-width: 1100px;
       height: 720px;
-      margin: 1.5em auto 1.8em auto;
-      background: linear-gradient(110deg, #f6faff 70%, #eaf3fb 100%);
+      margin: 1.5em auto 1.8em;
+      background: linear-gradient(110deg, #fffbe6 70%, #fff9d9 100%);
       border-radius: 18px;
-      box-shadow: 0 8px 32px #4299e11a, 0 1.5px 6px #38b2ac0d;
       padding: 2.7em 2.2em;
       display: flex;
       flex-direction: column;
       justify-content: center;
       box-sizing: border-box;
-      transition: box-shadow 0.18s;
-    }
-    .card:focus-within,
-    .card:hover {
-      box-shadow: 0 12px 36px #4299e12b, 0 2px 12px #38b2ac1a;
     }
     .hide {
       display: none;
@@ -73,8 +62,6 @@
       border: none;
       border-radius: 12px;
       background: #f1f5f9;
-      box-shadow: 0 2px 12px #38b2ac11;
-      transition: box-shadow 0.18s;
     }
     .card-content {
       width: 100%;
@@ -91,28 +78,24 @@
 <body>
   <div class="nav">
     <button class="active" onclick="show('projects',this)">Projects</button>
-    <button onclick="show('about',this)">About</button>
+    <button onclick="show('aboutme',this)">About Me</button>
   </div>
   <h1 id="main-title">Projects</h1>
   <div class="card" id="projects">
     <iframe src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
   </div>
-  <div class="card hide" id="about">
+  <div class="card hide" id="aboutme">
     <div class="card-content">
-      <b>About</b><br>
-      This is the About section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
+      <b>About Me</b><br>
+      This is the About Me section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
     </div>
   </div>
   <script>
     function show(id, btn) {
-      ['projects', 'about'].forEach(s =>
-        document.getElementById(s).classList.toggle('hide', s !== id)
-      );
-      document.getElementById('main-title').textContent =
-        id.charAt(0).toUpperCase() + id.slice(1);
-      document.querySelectorAll('.nav button').forEach(b =>
-        b.classList.remove('active')
-      );
+      document.getElementById('projects').classList.toggle('hide', id !== 'projects');
+      document.getElementById('aboutme').classList.toggle('hide', id !== 'aboutme');
+      document.getElementById('main-title').textContent = btn.textContent;
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
   </script>
