@@ -1,93 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Projects</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    html, body { height: 100%; }
     body {
       margin: 0;
       font-family: 'Inter', Arial, sans-serif;
       background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
       color: #2a4365;
-    }
-    .nav {
-      display: flex; justify-content: center; gap: 1.5em;
-      background: #fff9; backdrop-filter: blur(6px);
-      box-shadow: 0 2px 12px #2c3e500a;
-      border-radius: 0 0 18px 18px;
-      padding: 1em 0 0.7em 0;
-      margin-bottom: 2em;
-    }
-    .nav button {
-      background: none; border: none; font: 600 1.08em 'Inter',sans-serif;
-      color: #2a4365; padding: 0.5em 1.3em; border-radius: 8px;
-      cursor: pointer; transition: .2s;
-    }
-    .nav button.active, .nav button:hover {
-      background: linear-gradient(90deg,#38b2ac,#4299e1); color: #fff;
-      box-shadow: 0 4px 16px #4299e11a;
-    }
-    h1 {
-      text-align: center; font-family: 'Montserrat',sans-serif;
-      font-size: 2.2em; margin: 0 0 1.1em 0; letter-spacing: 1px;
-      text-shadow: 0 2px 12px #2c3e500a;
-    }
-    .card {
-      height: 50%;
-      margin: auto;
-      background: #fffdeef2;
-      border-radius: 18px;
-      box-shadow: 0 8px 40px #2c3e5022;
-      padding: 1.5em 1em 1.5em 1em;
-      animation: fadeIn .4s;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
     }
-    .hide { display: none; }
+    .nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+      border-radius: 0 0 18px 18px;
+      padding: 1em 0 0.7em 0;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+      margin-top: 1em;
+    }
+    .nav button {
+      background: none;
+      border: none;
+      font: 600 1.08em 'Inter', sans-serif;
+      color: #2a4365;
+      padding: 0.5em 1.3em;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav button.active,
+    .nav button:hover {
+      background: linear-gradient(90deg, #38b2ac, #4299e1);
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(66, 153, 225, 0.1);
+    }
+    h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2em;
+      margin: 1em 0 0.8em 0;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+      text-align: center;
+      width: 100%;
+      max-width: 900px;
+      box-sizing: border-box;
+    }
+    .card {
+      height: 50vh;
+      width: calc(50vh * (16 / 9)); /* Maintain 16:9 aspect ratio */
+      max-width: 95vw;
+      background: rgba(255, 255, 255, 0.93);
+      border-radius: 18px;
+      box-shadow: 0 8px 40px rgba(44, 62, 80, 0.13);
+      padding: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-sizing: border-box;
+      margin-bottom: 2em;
+      transition: opacity 0.3s ease;
+    }
+    .hide {
+      display: none;
+    }
     iframe {
-      border: none; border-radius: 12px;
-      box-shadow: 0 2px 14px #38b2ac22; margin-top: 1em;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
       background: #f1f5f9;
+      box-shadow: 0 2px 14px rgba(56, 178, 172, 0.15);
       display: block;
     }
     .card-content {
-      font-size: 1em;
-      margin-top: 2em;
-      line-height: 1.7;
+      font-size: 1.2em;
+      line-height: 1.6;
       text-align: center;
-    }
-    @keyframes fadeIn {
-      from { opacity:0; transform: translateY(30px);}
-      to { opacity:1; transform: translateY(0);}
+      color: #2a4365;
+      padding: 0 1em;
     }
   </style>
 </head>
 <body>
-  <div class="nav">
-    <button class="active" onclick="show('projects',this)">Projects</button>
-    <button onclick="show('about',this)">About</button>
-  </div>
+  <nav class="nav">
+    <button class="active" onclick="show('projects', this)">Projects</button>
+    <button onclick="show('about', this)">About</button>
+  </nav>
   <h1 id="main-title">Projects</h1>
   <div class="card" id="projects">
     <iframe src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
   </div>
   <div class="card hide" id="about">
     <div class="card-content">
-      <b>About</b><br>
+      <strong>About</strong><br />
       This is the About section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
     </div>
   </div>
   <script>
     function show(id, btn) {
-      ['projects','about'].forEach(s =>
-        document.getElementById(s).classList.toggle('hide', s !== id));
-      document.getElementById('main-title').textContent = id[0].toUpperCase() + id.slice(1);
-      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      ['projects', 'about'].forEach((section) => {
+        document.getElementById(section).classList.toggle('hide', section !== id);
+      });
+      document.getElementById('main-title').textContent = id.charAt(0).toUpperCase() + id.slice(1);
+      document.querySelectorAll('.nav button').forEach((button) =>
+        button.classList.remove('active')
+      );
       btn.classList.add('active');
     }
   </script>
