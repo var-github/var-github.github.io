@@ -12,23 +12,22 @@
       background: linear-gradient(120deg, #f8fafc 0%, #e0e7ef 100%);
       color: #2a4365;
       height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      min-height: 100vh;
+      width: 100vw;
     }
     .nav {
       display: flex;
       justify-content: center;
       gap: 1.5em;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255,255,255,0.6);
       backdrop-filter: blur(6px);
-      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+      box-shadow: 0 2px 12px rgba(44,62,80,0.06);
       border-radius: 0 0 18px 18px;
       padding: 1em 0 0.7em 0;
       width: 100%;
       max-width: 900px;
       box-sizing: border-box;
-      margin-top: 1em;
+      margin: 1em auto 0 auto;
     }
     .nav button {
       background: none;
@@ -40,49 +39,48 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    .nav button.active,
-    .nav button:hover {
+    .nav button.active, .nav button:hover {
       background: linear-gradient(90deg, #38b2ac, #4299e1);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(66, 153, 225, 0.1);
+      box-shadow: 0 4px 16px rgba(66,153,225,0.1);
     }
     h1 {
       font-family: 'Montserrat', sans-serif;
       font-size: 2.2em;
-      margin: 1em 0 0.8em 0;
+      margin: 1em 0 0.5em 0;
       letter-spacing: 1px;
-      text-shadow: 0 2px 12px rgba(44, 62, 80, 0.06);
+      text-shadow: 0 2px 12px rgba(44,62,80,0.06);
       text-align: center;
       width: 100%;
       max-width: 900px;
       box-sizing: border-box;
     }
     .card {
-      height: 50vh;
-      width: calc(50vh * (16 / 9)); /* Maintain 16:9 aspect ratio */
-      max-width: 95vw;
-      background: rgba(255, 255, 255, 0.93);
+      height: 80vh;
+      width: calc(80vh * (16 / 9));
+      max-width: 90vw;
+      min-width: 320px;
+      background: rgba(255,255,255,0.93);
       border-radius: 18px;
-      box-shadow: 0 8px 40px rgba(44, 62, 80, 0.13);
-      padding: 1em;
+      box-shadow: 0 8px 40px rgba(44,62,80,0.13);
+      padding: 0.5em;
       display: flex;
       justify-content: center;
       align-items: center;
       box-sizing: border-box;
-      margin-bottom: 2em;
+      margin: 0 auto;
       transition: opacity 0.3s ease;
     }
-    .hide {
-      display: none;
-    }
+    .hide { display: none; }
     iframe {
       width: 100%;
       height: 100%;
       border: none;
       border-radius: 12px;
       background: #f1f5f9;
-      box-shadow: 0 2px 14px rgba(56, 178, 172, 0.15);
+      box-shadow: 0 2px 14px rgba(56,178,172,0.15);
       display: block;
+      margin: 0;
     }
     .card-content {
       font-size: 1.2em;
@@ -90,6 +88,7 @@
       text-align: center;
       color: #2a4365;
       padding: 0 1em;
+      width: 100%;
     }
   </style>
 </head>
@@ -110,11 +109,11 @@
   </div>
   <script>
     function show(id, btn) {
-      ['projects', 'about'].forEach((section) => {
-        document.getElementById(section).classList.toggle('hide', section !== id);
-      });
+      ['projects', 'about'].forEach(section =>
+        document.getElementById(section).classList.toggle('hide', section !== id)
+      );
       document.getElementById('main-title').textContent = id.charAt(0).toUpperCase() + id.slice(1);
-      document.querySelectorAll('.nav button').forEach((button) =>
+      document.querySelectorAll('.nav button').forEach(button =>
         button.classList.remove('active')
       );
       btn.classList.add('active');
