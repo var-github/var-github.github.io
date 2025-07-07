@@ -139,8 +139,7 @@
       z-index: 0;
       position: relative;
     }
-    .side-panel:hover ~ .card-content-area,
-    .side-panel:focus-within ~ .card-content-area {
+    .side-panel:hover ~ .card-content-area {
       padding-left: var(--card-padding);
     }
     .project-iframe {
@@ -169,31 +168,6 @@
       line-height: 1.7;
       padding: 1.2em 0.5em 0 0.5em;
     }
-    /* Loading animation styles */
-    #loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(255, 255, 255, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    .spinner {
-      border: 8px solid #f3f3f3;
-      border-top: 8px solid #3498db;
-      border-radius: 50%;
-      width: 60px;
-      height: 60px;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
     @media (max-width: 900px) {
       :root {
         --card-padding: 1em;
@@ -213,7 +187,7 @@
         height: 50px;
         transition: height 0.3s, width 0s;
       }
-      .side-panel:hover, .side-panel:focus-within {
+      .side-panel:hover {
         height: 180px;
         width: 100vw;
       }
@@ -233,10 +207,6 @@
   </style>
 </head>
 <body>
-  <!-- Loading overlay -->
-  <div id="loading-overlay">
-    <div class="spinner"></div>
-  </div>
   <div class="nav">
     <button class="active" onclick="show('projects',this)">Projects</button>
     <button onclick="show('aboutme',this)">About Me</button>
@@ -274,25 +244,7 @@
       </div>
     </div>
   </div>
-  <script>
-    function changeProject(idx, btn) {
-      // Switch active iframe
-      document.querySelectorAll('.project-iframe').forEach((iframe, i) => {
-        iframe.classList.toggle('active', i === idx);
-      });
-      // Switch active button
-      document.querySelectorAll('.project-list button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      // Collapse the side panel after selection
-      const panel = document.getElementById('side-panel');
-      panel.blur(); // remove focus (for keyboard users)
-      // For mouse users: temporarily disable pointer events to trigger collapse
-      panel.style.pointerEvents = 'none';
-      setTimeout(() => {
-        panel.style.pointerEvents = '';
-      }, 120);
-    }
-
+  <script>    
     function show(id, btn) {
       document.getElementById('projects').classList.toggle('hide', id !== 'projects');
       document.getElementById('aboutme').classList.toggle('hide', id !== 'aboutme');
@@ -300,22 +252,6 @@
       document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
-
-    // Loading overlay logic
-    window.addEventListener('DOMContentLoaded', () => {
-      const loadingOverlay = document.getElementById('loading-overlay');
-      const iframes = document.querySelectorAll('.project-iframe');
-      let loadedCount = 0;
-      const totalIframes = iframes.length;
-      iframes.forEach(iframe => {
-        iframe.addEventListener('load', () => {
-          loadedCount++;
-          if (loadedCount === totalIframes) {
-            loadingOverlay.style.display = 'none';
-          }
-        });
-      });
-    });
   </script>
 </body>
 </html>
