@@ -176,24 +176,25 @@
       top: 50px;
       left: 10px;
     }
-    /* Navigation buttons for projects (icon only) */
+    /* Navigation buttons for projects (icon only, no background) */
     .nav-button {
       position: absolute;
       bottom: 10px;
-      padding: 0.4em 0.6em;
-      font-size: 2em;
-      border-radius: 50%;
+      left: auto;
+      right: auto;
+      background: none;
       border: none;
+      box-shadow: none;
+      padding: 0;
+      margin: 0;
       cursor: pointer;
-      background-color: #e3f0ff;
-      color: #243b55;
-      transition: background 0.2s, color 0.2s;
+      color: #e3f0ff;
       z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.95;
-      box-shadow: 0 2px 6px rgba(36,59,85,0.08);
+      font-size: 2.2em;
+      transition: color 0.2s;
     }
     #prev-project {
       left: 10px;
@@ -202,8 +203,8 @@
       right: 10px;
     }
     .nav-button:hover {
-      background-color: #243b55;
-      color: #e3f0ff;
+      color: #fff;
+      background: none;
     }
     /* Hide nav buttons when About Me is visible */
     #aboutme .nav-button {
@@ -241,7 +242,7 @@
           class="project-iframe"
           src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
           title="Chatbot"></iframe>
-        <!-- Navigation Buttons with icons only -->
+        <!-- Navigation Buttons with icons only, no background -->
         <button id="prev-project" class="nav-button" title="Previous Project">
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
