@@ -252,6 +252,16 @@
       document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
+
+    function changeProject(idx, btn) {
+      // Switch active iframe
+      document.querySelectorAll('.project-iframe').forEach((iframe, i) => {
+        iframe.classList.toggle('active', i === idx);
+      });
+      // Switch active button
+      document.querySelectorAll('.project-list button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
   </script>
 </body>
 </html>
