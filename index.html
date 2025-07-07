@@ -82,19 +82,16 @@
       position: relative;
       z-index: 1;
     }
-    .side-panel:hover, .side-panel:focus-within {
+    .side-panel:hover {
       width: var(--sidepanel-expanded);
     }
-    .panel-title,
-    .project-list {
+    .panel-title, .project-list {
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s;
     }
     .side-panel:hover .panel-title,
-    .side-panel:focus-within .panel-title,
-    .side-panel:hover .project-list,
-    .side-panel:focus-within .project-list {
+    .side-panel:hover .project-list {
       opacity: 1;
       pointer-events: auto;
     }
