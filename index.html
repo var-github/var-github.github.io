@@ -127,7 +127,6 @@
       background: #e3f0ff;
       color: #243b55;
     }
-    /* Card content area with dynamic left padding */
     .card-content-area {
       flex: 1;
       display: flex;
@@ -147,7 +146,6 @@
     .side-panel:focus-within ~ .card-content-area {
       padding-left: var(--card-padding);
     }
-    /* Iframe visibility logic */
     .project-iframe {
       display: none;
       width: 100%;
@@ -250,7 +248,7 @@
   <div class="card-wrapper">
     <!-- Projects Card -->
     <div class="container" id="projects">
-      <div class="side-panel" tabindex="0">
+      <div class="side-panel" id="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
           <li><button class="active" onclick="changeProject(0, this)">Sudoku Solver</button></li>
@@ -281,13 +279,21 @@
   </div>
   <script>
     function changeProject(idx, btn) {
-      // Hide all iframes, show only the selected one
+      // Switch active iframe
       document.querySelectorAll('.project-iframe').forEach((iframe, i) => {
         iframe.classList.toggle('active', i === idx);
       });
-      // Set active button
+      // Switch active button
       document.querySelectorAll('.project-list button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+      // Collapse the side panel after selection
+      const panel = document.getElementById('side-panel');
+      panel.blur(); // remove focus (for keyboard users)
+      // For mouse users: temporarily disable pointer events to trigger collapse
+      panel.style.pointerEvents = 'none';
+      setTimeout(() => {
+        panel.style.pointerEvents = '';
+      }, 120);
     }
 
     function show(id, btn) {
@@ -304,7 +310,6 @@
       const iframes = document.querySelectorAll('.project-iframe');
       let loadedCount = 0;
       const totalIframes = iframes.length;
-
       iframes.forEach(iframe => {
         iframe.addEventListener('load', () => {
           loadedCount++;
