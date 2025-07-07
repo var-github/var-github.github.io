@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <title>Projects</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Google Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <style>
     :root {
       --card-padding: 2em;
@@ -69,6 +72,21 @@
     .container {
       flex-direction: row;
       z-index: 2;
+    }
+    /* Material icon styling */
+    .container .material-icons {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      color: #e3f0ff;
+      font-size: 2.5em;
+      cursor: pointer;
+      z-index: 10;
+      user-select: none;
+      transition: color 0.2s;
+    }
+    .container .material-icons:hover {
+      color: #fff;
     }
     .side-panel {
       width: var(--sidepanel-collapsed);
@@ -183,6 +201,11 @@
       .container {
         flex-direction: column;
       }
+      .container .material-icons {
+        top: 0.5em;
+        left: 0.5em;
+        font-size: 2em;
+      }
       .side-panel {
         width: 100vw;
         height: 50px;
@@ -216,6 +239,8 @@
   <div class="card-wrapper">
     <!-- Projects Card -->
     <div class="container" id="projects">
+      <!-- Google Material Icon on top left -->
+      <span class="material-icons">left_panel_open</span>
       <div class="side-panel" id="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
