@@ -172,46 +172,8 @@
       line-height: 1.7;
       padding: 1.2em 0.5em 0 0.5em;
     }
-    @media (max-width: 900px) {
-      :root {
-        --card-padding: 1em;
-        --sidepanel-collapsed: 100vw;
-        --sidepanel-expanded: 100vw;
-      }
-      .card-wrapper, .container, .card {
-        max-width: 100vw;
-        width: 100vw;
-        min-height: 0;
-      }
-      .container {
-        flex-direction: column;
-      }
-      .container .material-icons {
-        top: 2em;
-        left: 0.5em;
-        font-size: 2em;
-      }
-      .side-panel {
-        width: 100vw;
-        height: 50px;
-        transition: height 0.3s, width 0s;
-      }
-      .side-panel:hover {
-        height: 180px;
-        width: 100vw;
-      }
-      .panel-title {
-        padding: 1.1em 0.8em 0.7em 0.8em;
-      }
-      .card-content-area {
-        border-radius: 0 0 18px 18px;
-        min-height: 350px;
-        padding: var(--card-padding);
-        padding-left: var(--card-padding);
-      }
-      .project-iframe {
-        height: 350px;
-      }
+    .material-symbols-outlined {
+      position: fixed;
     }
   </style>
 </head>
