@@ -176,7 +176,7 @@
       position: absolute;
       color: white;
     }
-    /* Nav buttons with icon only, no background */
+    /* Nav buttons with icon only, no background, always visible and clickable */
     .nav-button {
       position: absolute;
       bottom: 10px;
@@ -185,23 +185,19 @@
       padding: 0;
       margin: 0;
       cursor: pointer;
-      color: #e3f0ff;
+      color: #243b55;
       font-size: 2.2em;
-      transition: color 0.2s;
+      width: 1.5em;
+      height: 1.5em;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2;
+      transition: color 0.2s;
     }
-    #prev-project {
-      left: 10px;
-    }
-    #next-project {
-      right: 10px;
-    }
-    .nav-button:hover {
-      color: #fff;
-    }
+    #prev-project { left: 10px; }
+    #next-project { right: 10px; }
+    .nav-button:hover { color: #fff; }
     /* Hide nav buttons when About Me is visible */
     #aboutme .nav-button {
       display: none !important;
@@ -236,7 +232,6 @@
           class="project-iframe"
           src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
           title="Chatbot"></iframe>
-
         <!-- Navigation buttons -->
         <button id="prev-project" class="nav-button" title="Previous Project">
           <span class="material-symbols-outlined">arrow_back</span>
@@ -246,7 +241,6 @@
         </button>
       </div>
     </div>
-
     <!-- About Me Card -->
     <div class="card hide" id="aboutme">
       <div class="card-content">
@@ -255,7 +249,6 @@
       </div>
     </div>
   </div>
-
   <script>
     function show(id, btn) {
       document.getElementById('projects').classList.toggle('hide', id !== 'projects');
