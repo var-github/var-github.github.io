@@ -204,6 +204,13 @@
     #aboutme .nav-button {
       display: none !important;
     }
+    .panel-icon{
+        position: absolute;
+        color: white;
+        z-index: 2;
+        top: 40px;
+        left: 13px;
+    }
   </style>
 </head>
 <body>
@@ -216,9 +223,7 @@
     <!-- Projects Card -->
     <div class="container" id="projects">
       <!-- Google Material Icon on top left -->
-      <div class="panel-icon">
-        <span class="material-symbols-outlined">auto_awesome_mosaic</span>
-      </div>
+      <span class="material-symbols-outlined panel-icon">auto_awesome_mosaic</span>
       <div class="side-panel" id="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
