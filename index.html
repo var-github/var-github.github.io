@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Projects</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <!-- Google Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <style>
@@ -140,8 +140,8 @@
       min-width: 0;
       min-height: 0;
       transition: padding-left 0.3s;
-      z-index: 0;
       position: relative;
+      z-index: 0;
     }
     .side-panel:hover ~ .card-content-area {
       padding-left: var(--card-padding);
@@ -150,8 +150,6 @@
       display: none;
       width: 100%;
       height: 100%;
-      min-height: 0;
-      min-width: 0;
       border: none;
       border-radius: 12px;
       background: #f1f5f9;
@@ -172,32 +170,28 @@
       line-height: 1.7;
       padding: 1.2em 0.5em 0 0.5em;
     }
-    .panel-icon {
+    .material-symbols-outlined {
+      top: 50px;
+      left: 10px;
       position: absolute;
-      top: 32px;
-      left: 13px;
       color: white;
-      z-index: 100;
     }
-    /* Navigation buttons for projects (icon only, no background) */
+    /* Nav buttons with icon only, no background */
     .nav-button {
       position: absolute;
       bottom: 10px;
-      left: auto;
-      right: auto;
       background: none;
       border: none;
-      box-shadow: none;
       padding: 0;
       margin: 0;
       cursor: pointer;
       color: #e3f0ff;
-      z-index: 2;
+      font-size: 2.2em;
+      transition: color 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2em;
-      transition: color 0.2s;
+      z-index: 2;
     }
     #prev-project {
       left: 10px;
@@ -207,7 +201,6 @@
     }
     .nav-button:hover {
       color: #fff;
-      background: none;
     }
     /* Hide nav buttons when About Me is visible */
     #aboutme .nav-button {
@@ -217,16 +210,15 @@
 </head>
 <body>
   <div class="nav">
-    <button class="active" onclick="show('projects',this)">Projects</button>
-    <button onclick="show('aboutme',this)">About Me</button>
+    <button class="active" onclick="show('projects', this)">Projects</button>
+    <button onclick="show('aboutme', this)">About Me</button>
   </div>
   <h1 id="main-title">Projects</h1>
   <div class="card-wrapper">
     <!-- Projects Card -->
     <div class="container" id="projects">
-      <!-- Google Material Icon on top left -->
-      <span class="material-symbols-outlined panel-icon">left_panel_open</span>
-      <div class="side-panel" id="side-panel" tabindex="0">
+      <span class="material-symbols-outlined">left_panel_open</span>
+      <div class="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
           <li><button class="active" onclick="changeProject(0, this)">Sudoku Solver</button></li>
@@ -234,7 +226,6 @@
         </ul>
       </div>
       <div class="card-content-area">
-        <!-- Preload all iframes, only show active one -->
         <iframe
           id="project-iframe-0"
           class="project-iframe active"
@@ -245,7 +236,8 @@
           class="project-iframe"
           src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
           title="Chatbot"></iframe>
-        <!-- Navigation Buttons with icons only, no background -->
+
+        <!-- Navigation buttons -->
         <button id="prev-project" class="nav-button" title="Previous Project">
           <span class="material-symbols-outlined">arrow_back</span>
         </button>
@@ -254,58 +246,54 @@
         </button>
       </div>
     </div>
+
     <!-- About Me Card -->
     <div class="card hide" id="aboutme">
       <div class="card-content">
-        <b>About Me</b><br>
+        <b>About Me</b><br />
         This is the About Me section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
       </div>
     </div>
   </div>
-  <script>    
+
+  <script>
     function show(id, btn) {
       document.getElementById('projects').classList.toggle('hide', id !== 'projects');
       document.getElementById('aboutme').classList.toggle('hide', id !== 'aboutme');
       document.getElementById('main-title').textContent = btn.textContent;
-      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav button').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
     function changeProject(idx, btn) {
-      // Switch active iframe
       document.querySelectorAll('.project-iframe').forEach((iframe, i) => {
         iframe.classList.toggle('active', i === idx);
       });
-      // Switch active button
-      document.querySelectorAll('.project-list button').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.project-list button').forEach((b) => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
-    // Next/Prev project navigation
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
       const projectButtons = document.querySelectorAll('.project-list button');
       const iframes = document.querySelectorAll('.project-iframe');
 
-      function getCurrentProjectIndex() {
-        return Array.from(iframes).findIndex(iframe => iframe.classList.contains('active'));
-      }
+      const getCurrentIndex = () =>
+        Array.from(iframes).findIndex((iframe) => iframe.classList.contains('active'));
 
-      function changeProjectByIndex(idx) {
+      const changeByIndex = (idx) => {
         if (idx < 0) idx = projectButtons.length - 1;
         if (idx >= projectButtons.length) idx = 0;
         projectButtons[idx].click();
-      }
+      };
 
-      document.getElementById('prev-project').addEventListener('click', function(e) {
+      document.getElementById('prev-project').addEventListener('click', (e) => {
         e.stopPropagation();
-        let currentIndex = getCurrentProjectIndex();
-        changeProjectByIndex(currentIndex - 1);
+        changeByIndex(getCurrentIndex() - 1);
       });
 
-      document.getElementById('next-project').addEventListener('click', function(e) {
+      document.getElementById('next-project').addEventListener('click', (e) => {
         e.stopPropagation();
-        let currentIndex = getCurrentProjectIndex();
-        changeProjectByIndex(currentIndex + 1);
+        changeByIndex(getCurrentIndex() + 1);
       });
     });
   </script>
