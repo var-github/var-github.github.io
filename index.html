@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Projects</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <!-- Google Material Icons -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
   <style>
@@ -140,22 +140,32 @@
       min-width: 0;
       min-height: 0;
       transition: padding-left 0.3s;
-      position: relative;
       z-index: 0;
+      position: relative;
     }
     .side-panel:hover ~ .card-content-area {
       padding-left: var(--card-padding);
     }
+    /* Wrapper for iframe and nav buttons */
+    .iframe-nav-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: margin-left 0.3s;
+      margin-left: 0;
+    }
+    .side-panel:hover ~ .card-content-area .iframe-nav-wrapper {
+      margin-left: calc(var(--sidepanel-expanded) - var(--sidepanel-collapsed));
+    }
     .project-iframe {
-      display: none;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
       width: 100%;
       height: 100%;
       border: none;
       border-radius: 12px;
       background: #f1f5f9;
-      box-sizing: border-box;
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
     }
     .project-iframe.active {
       display: block;
@@ -173,31 +183,35 @@
     .material-symbols-outlined {
       top: 50px;
       left: 10px;
-      position: absolute;
-      color: white;
     }
-    /* Nav buttons with icon only, no background, always visible and clickable */
+    /* Navigation buttons for projects (icon only, no background) */
     .nav-button {
       position: absolute;
       bottom: 10px;
       background: none;
       border: none;
+      box-shadow: none;
       padding: 0;
       margin: 0;
       cursor: pointer;
-      color: #243b55;
-      font-size: 2.2em;
-      width: 1.5em;
-      height: 1.5em;
+      color: #e3f0ff;
+      z-index: 2;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 2;
+      font-size: 2.2em;
       transition: color 0.2s;
     }
-    #prev-project { left: 10px; }
-    #next-project { right: 10px; }
-    .nav-button:hover { color: #fff; }
+    #prev-project {
+      left: 10px;
+    }
+    #next-project {
+      right: 10px;
+    }
+    .nav-button:hover {
+      color: #fff;
+      background: none;
+    }
     /* Hide nav buttons when About Me is visible */
     #aboutme .nav-button {
       display: none !important;
@@ -206,15 +220,16 @@
 </head>
 <body>
   <div class="nav">
-    <button class="active" onclick="show('projects', this)">Projects</button>
-    <button onclick="show('aboutme', this)">About Me</button>
+    <button class="active" onclick="show('projects',this)">Projects</button>
+    <button onclick="show('aboutme',this)">About Me</button>
   </div>
   <h1 id="main-title">Projects</h1>
   <div class="card-wrapper">
     <!-- Projects Card -->
     <div class="container" id="projects">
-      <span class="material-symbols-outlined">left_panel_open</span>
-      <div class="side-panel" tabindex="0">
+      <!-- Google Material Icon on top left -->
+      <span class="material-symbols-outlined" style="color: white;">left_panel_open</span>
+      <div class="side-panel" id="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
           <li><button class="active" onclick="changeProject(0, this)">Sudoku Solver</button></li>
@@ -222,71 +237,80 @@
         </ul>
       </div>
       <div class="card-content-area">
-        <iframe
-          id="project-iframe-0"
-          class="project-iframe active"
-          src="https://varun-sudoku-solver.streamlit.app/?embed=true"
-          title="Sudoku Solver"></iframe>
-        <iframe
-          id="project-iframe-1"
-          class="project-iframe"
-          src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
-          title="Chatbot"></iframe>
-        <!-- Navigation buttons -->
-        <button id="prev-project" class="nav-button" title="Previous Project">
-          <span class="material-symbols-outlined">arrow_back</span>
-        </button>
-        <button id="next-project" class="nav-button" title="Next Project">
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </button>
+        <div class="iframe-nav-wrapper">
+          <!-- Preload all iframes, only show active one -->
+          <iframe
+            id="project-iframe-0"
+            class="project-iframe active"
+            src="https://varun-sudoku-solver.streamlit.app/?embed=true"
+            title="Sudoku Solver"></iframe>
+          <iframe
+            id="project-iframe-1"
+            class="project-iframe"
+            src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
+            title="Chatbot"></iframe>
+          <!-- Navigation Buttons with icons only, no background -->
+          <button id="prev-project" class="nav-button" title="Previous Project">
+            <span class="material-symbols-outlined">arrow_back</span>
+          </button>
+          <button id="next-project" class="nav-button" title="Next Project">
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
       </div>
     </div>
     <!-- About Me Card -->
     <div class="card hide" id="aboutme">
       <div class="card-content">
-        <b>About Me</b><br />
+        <b>About Me</b><br>
         This is the About Me section. Add your content here. You can include more details, images, or anything you wish, and it will have plenty of space!
       </div>
     </div>
   </div>
-  <script>
+  <script>    
     function show(id, btn) {
       document.getElementById('projects').classList.toggle('hide', id !== 'projects');
       document.getElementById('aboutme').classList.toggle('hide', id !== 'aboutme');
       document.getElementById('main-title').textContent = btn.textContent;
-      document.querySelectorAll('.nav button').forEach((b) => b.classList.remove('active'));
+      document.querySelectorAll('.nav button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
     function changeProject(idx, btn) {
+      // Switch active iframe
       document.querySelectorAll('.project-iframe').forEach((iframe, i) => {
         iframe.classList.toggle('active', i === idx);
       });
-      document.querySelectorAll('.project-list button').forEach((b) => b.classList.remove('active'));
+      // Switch active button
+      document.querySelectorAll('.project-list button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    // Next/Prev project navigation
+    document.addEventListener('DOMContentLoaded', function() {
       const projectButtons = document.querySelectorAll('.project-list button');
       const iframes = document.querySelectorAll('.project-iframe');
 
-      const getCurrentIndex = () =>
-        Array.from(iframes).findIndex((iframe) => iframe.classList.contains('active'));
+      function getCurrentProjectIndex() {
+        return Array.from(iframes).findIndex(iframe => iframe.classList.contains('active'));
+      }
 
-      const changeByIndex = (idx) => {
+      function changeProjectByIndex(idx) {
         if (idx < 0) idx = projectButtons.length - 1;
         if (idx >= projectButtons.length) idx = 0;
         projectButtons[idx].click();
-      };
+      }
 
-      document.getElementById('prev-project').addEventListener('click', (e) => {
+      document.getElementById('prev-project').addEventListener('click', function(e) {
         e.stopPropagation();
-        changeByIndex(getCurrentIndex() - 1);
+        let currentIndex = getCurrentProjectIndex();
+        changeProjectByIndex(currentIndex - 1);
       });
 
-      document.getElementById('next-project').addEventListener('click', (e) => {
+      document.getElementById('next-project').addEventListener('click', function(e) {
         e.stopPropagation();
-        changeByIndex(getCurrentIndex() + 1);
+        let currentIndex = getCurrentProjectIndex();
+        changeProjectByIndex(currentIndex + 1);
       });
     });
   </script>
