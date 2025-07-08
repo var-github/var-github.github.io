@@ -170,7 +170,7 @@
       line-height: 1.7;
       padding: 1.2em 0.5em 0 0.5em;
     }
-    #panel-icon {
+    .panel-icon {
       position: absolute;
       top: 50px;
       left: 10px;
@@ -180,9 +180,7 @@
     /* Navigation buttons for projects (icon only, no background) */
     .nav-button {
       position: absolute;
-      bottom: 10px;
-      left: auto;
-      right: auto;
+      bottom: 5px;
       background: none;
       border: none;
       box-shadow: none;
@@ -198,11 +196,9 @@
       transition: color 0.2s;
     }
     #prev-project {
-      top: 5px;
       transform: rotate(90deg);
     }
     #next-project {
-      top: 5px;
       right: 20px;
       transform: rotate(-90deg);
     }
@@ -226,7 +222,9 @@
     <!-- Projects Card -->
     <div class="container" id="projects">
       <!-- Google Material Icon on top left -->
-      <span class="material-symbols-outlined" id="panel-icon">auto_awesome_mosaic</span>
+      <div class="panel-icon">
+        <span class="material-symbols-outlined">auto_awesome_mosaic</span>
+      </div>
       <div class="side-panel" id="side-panel" tabindex="0">
         <div class="panel-title">Choose Project</div>
         <ul class="project-list">
