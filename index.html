@@ -146,26 +146,18 @@
     .side-panel:hover ~ .card-content-area {
       padding-left: var(--card-padding);
     }
-    /* Wrapper for iframe and nav buttons */
-    .iframe-nav-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transition: margin-left 0.3s;
-      margin-left: 0;
-    }
-    .side-panel:hover ~ .card-content-area .iframe-nav-wrapper {
-      margin-left: calc(var(--sidepanel-expanded) - var(--sidepanel-collapsed));
-    }
     .project-iframe {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      display: none;
       width: 100%;
       height: 100%;
+      min-height: 0;
+      min-width: 0;
       border: none;
       border-radius: 12px;
       background: #f1f5f9;
-      display: none;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
     }
     .project-iframe.active {
       display: block;
@@ -188,6 +180,8 @@
     .nav-button {
       position: absolute;
       bottom: 10px;
+      left: auto;
+      right: auto;
       background: none;
       border: none;
       box-shadow: none;
@@ -237,26 +231,24 @@
         </ul>
       </div>
       <div class="card-content-area">
-        <div class="iframe-nav-wrapper">
-          <!-- Preload all iframes, only show active one -->
-          <iframe
-            id="project-iframe-0"
-            class="project-iframe active"
-            src="https://varun-sudoku-solver.streamlit.app/?embed=true"
-            title="Sudoku Solver"></iframe>
-          <iframe
-            id="project-iframe-1"
-            class="project-iframe"
-            src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
-            title="Chatbot"></iframe>
-          <!-- Navigation Buttons with icons only, no background -->
-          <button id="prev-project" class="nav-button" title="Previous Project">
-            <span class="material-symbols-outlined">arrow_back</span>
-          </button>
-          <button id="next-project" class="nav-button" title="Next Project">
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </button>
-        </div>
+        <!-- Preload all iframes, only show active one -->
+        <iframe
+          id="project-iframe-0"
+          class="project-iframe active"
+          src="https://varun-sudoku-solver.streamlit.app/?embed=true"
+          title="Sudoku Solver"></iframe>
+        <iframe
+          id="project-iframe-1"
+          class="project-iframe"
+          src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true"
+          title="Chatbot"></iframe>
+        <!-- Navigation Buttons with icons only, no background -->
+        <button id="prev-project" class="nav-button" title="Previous Project">
+          <span class="material-symbols-outlined">arrow_back</span>
+        </button>
+        <button id="next-project" class="nav-button" title="Next Project">
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </button>
       </div>
     </div>
     <!-- About Me Card -->
