@@ -19,3 +19,5 @@ Structure of package.json if required
   }  
 }
 ```
+
+Then the file you create should have 1 main function - all code should be inside this function
