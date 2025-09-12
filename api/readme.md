@@ -43,22 +43,23 @@ After succesfully deploying, you can now call your serverless function by sendin
 First create a GitHub workflow, which runs on 'workflow_dispatch'
 
 ```
-https://api.github.com/repos/**<repo owner>**/<repo name>/actions/workflows/<workflowFile name>/dispatches
+https://api.github.com/repos/<repo owner>/<repo name>/actions/workflows/<workflowFile name>/dispatches
 
 const headers = {
   "Accept": "application/vnd.github+json",
-  "Authorization": 'Bearer **<Github PAT access token>**',
+  "Authorization": 'Bearer <Github PAT access token>',
   "Content-Type": "application/json"
 };
 
 const data = {
+  // ref: pass the branch in github on which you want to run workflow
   ref: 'main',
   inputs: {
     <put variable name here>: 'pass data here'
   }
 };
 
-  
+// Sending POST request to URL
 const response = await fetch(url, {
   method: 'POST',
   headers: headers,
