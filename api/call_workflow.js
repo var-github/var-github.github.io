@@ -5,7 +5,7 @@ export default async function handler(req, res) {
   const repo = "var-github.github.io";  // Replace with your repo name
   const workflowFile = "keep_app_up.yaml";  // Your workflow file name
   const branch = "main";  // Branch to trigger the workflow on
-  const token = process.env.TOKEN;  // GitHub PAT set as Vercel environment variable
+  const token = process.env.access_token;  // GitHub PAT set as Vercel environment variable
 
   const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
 
