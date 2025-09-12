@@ -48,15 +48,24 @@
     <script>
         // Tab switching
         function show(id, btn) {
-            document.getElementById('projects').style.display = id === 'projects' ? '' : 'none';
-            document.getElementById('aboutme').style.display = id === 'aboutme' ? '' : 'none';
+            // Using ternary operator - (condition ? expressionIfTrue : expressionIfFalse;)
+            // Setting display to '' (default) or 'none'
+            document.getElementById('projects').style.display = (id == 'projects' ? '' : 'none');
+            document.getElementById('aboutme').style.display = (id == 'aboutme' ? '' : 'none');
+            // Setting tab title
             document.getElementById('main-title').textContent = btn.textContent;
+            // Remove active class from all buttons
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            // Add active class to this button
             btn.classList.add('active');
         }
         // Project switching
         function changeProject(idx, btn) {
-            document.querySelectorAll('iframe').forEach((f, i) => f.classList.toggle('active', i === idx));
+            // .forEach((f, i) => ...) loops over each iframe element f with its index i
+            // .toggle("class to toggle", true/false)
+            //  If i == idx is true, the class 'active' is added
+            //  If i == idx is false, the class 'active' is removed
+            document.querySelectorAll('iframe').forEach((f, i) => f.classList.toggle('active', i == idx));
             document.querySelectorAll('ul button').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
