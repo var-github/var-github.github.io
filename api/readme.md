@@ -20,4 +20,9 @@ Structure of package.json if required
 }
 ```
 
-Then the file you create should have 1 main function - all code should be inside this function
+All your code should be inside this function
+```
+export default async function handler(req, res) {
+}
+```
+After your code to set status of call
