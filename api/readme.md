@@ -8,7 +8,7 @@ If you are using any packages, you need to create package.json
 
 Structure of package.json if required
 {
-  "name": "Name",
+  "name": "Name",<\n>
   "version": "1.0.0",
   "description": "Description",
   "main": "api/\<INSERT JS file name here>.js",
