@@ -74,7 +74,13 @@
         }
         
         // Call this once on DOM ready
-        document.addEventListener('DOMContentLoaded', createProjectElements);
+        document.addEventListener("DOMContentLoaded", function() {
+            // Call API and wait for completion
+            fetch('https://var-github-projects.vercel.app/api/call_workflow')
+                .finally(() => {
+                    createProjectElements();
+                });
+        });
         
         // Tab switching
         function show(id, btn) {
