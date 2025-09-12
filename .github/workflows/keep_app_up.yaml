@@ -39,4 +39,5 @@ jobs:
       uses: nanasess/setup-chromedriver@v2
     
     # Runs code and passes string as command line argument
-    - run: python script.py '${{ github.event.inputs.urls }}'
+    - name: Run Python code
+      run: python script.py '${{ github.event.inputs.urls }}'
