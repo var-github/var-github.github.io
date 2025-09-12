@@ -74,8 +74,8 @@
         }
         
         // Call this once on DOM ready
-        document.addEventListener("DOMContentLoaded", async function() {
-            const response = await fetch('https://var-github-projects.vercel.app/api/call_workflow');        
+        document.addEventListener("DOMContentLoaded", function() {
+            // const response = await fetch('https://var-github-projects.vercel.app/api/call_workflow');        
             // Now call createProjectElements after the fetch completes successfully
             createProjectElements();
         });
