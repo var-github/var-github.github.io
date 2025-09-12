@@ -33,10 +33,36 @@ Your entire code will be called by a POST method, therefore to set status after 
 
 To send some message along with status
 - **res.status(200).json(\<Pass any json data here>);**
+
+After succesfully deploying, you can now call your serverless function by sending a POST request to the URL provided by vercel
 </details>
 
 <details>
 <summary><code>Running a github workflow programatically</code></summary>
 <br>
 First create a GitHub workflow, which runs on 'workflow_dispatch'
+
+```
+https://api.github.com/repos/**<repo owner>**/<repo name>/actions/workflows/<workflowFile name>/dispatches
+
+const headers = {
+  "Accept": "application/vnd.github+json",
+  "Authorization": 'Bearer **<Github PAT access token>**',
+  "Content-Type": "application/json"
+};
+
+const data = {
+  ref: 'main',
+  inputs: {
+    <put variable name here>: 'pass data here'
+  }
+};
+
+  
+const response = await fetch(url, {
+  method: 'POST',
+  headers: headers,
+  body: JSON.stringify(data)
+});
+```
 </details>
