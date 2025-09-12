@@ -73,12 +73,7 @@
           });
         }
 
-        (async () => {
-          fetch('https://var-github-projects.vercel.app/api/call_workflow')
-            .then(response => {
-              createProjectElements();
-            });
-        })();
+        document.addEventListener('DOMContentLoaded', createProjectElements);
         
         // Tab switching
         function show(id, btn) {
