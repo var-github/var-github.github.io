@@ -26,8 +26,7 @@
                 <li><button onclick="changeProject(2,this)">Translator</button></li>
             -->
         </aside>
-        <main>
-            <div id="iframe-container"></div>
+        <main id="iframe-container">
             <button id="prev-project" class="nav-button" title="Previous Project">
                 <span class="material-symbols-outlined">arrow_cool_down</span>
             </button>
@@ -78,9 +77,19 @@
         document.addEventListener("DOMContentLoaded", function() {
             // Call API and wait for completion
             fetch('https://var-github-projects.vercel.app/api/call_workflow')
-                .then(response => {
-                    createProjectElements();
-                });
+              .then(response => {
+                console.log('API called, response received:', response);
+                if (!response.ok) throw new Error('API response not ok');
+                try {
+                  createProjectElements();
+                  console.log('createProjectElements executed successfully');
+                } catch (error) {
+                  console.error('Error in createProjectElements:', error);
+                }
+              })
+              .catch(error => {
+                console.error('API call error:', error);
+              });
         });
         
         // Tab switching
