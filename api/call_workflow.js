@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export default async function handler(req, res) {
   const owner = "var-github";  // Replace with your GitHub repo owner
   const repo = "var-github.github.io";  // Replace with your repo name
