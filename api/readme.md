@@ -7,12 +7,22 @@ Add any envirnment secrets you want to add and deploy
 If you are using any packages, you need to create package.json
 
 Structure of package.json if required
+
 {
-  "name": "Name",<\n>
+
+  "name": "Name",
+  
   "version": "1.0.0",
+  
   "description": "Description",
+  
   "main": "api/\<INSERT JS file name here>.js",
+  
   "dependencies": {
+  
     "\<module name>": "\<version>"
+    
   }
+  
 }
+
