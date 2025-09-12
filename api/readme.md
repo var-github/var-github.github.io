@@ -1,3 +1,5 @@
+<details>
+<summary>Creating serverless function that can be called via POST method</summary>
 We are creating a serverless function called call_workflow.js
 To do this create new project in vercel - choose repo
 
@@ -30,3 +32,4 @@ Your entire code will be called by a POST method, therefore to set status after 
 
 To send some message along with status
 - **res.status(200).json(\<Pass any json data here>);**
+</details>
