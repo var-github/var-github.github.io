@@ -77,7 +77,7 @@
         document.addEventListener("DOMContentLoaded", function() {
             // Call API and wait for completion
             fetch('https://var-github-projects.vercel.app/api/call_workflow')
-                .finally(() => {
+                .then(response => {
                     createProjectElements();
                 });
         });
