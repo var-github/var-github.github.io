@@ -1,0 +1,9 @@
+{
+  "name": "vercel-serverless-call-workflow",
+  "version": "1.0.0",
+  "description": "Vercel serverless function to trigger GitHub workflow",
+  "main": "api/call_workflow.js",
+  "dependencies": {
+    "node-fetch": "^3.3.1"
+  }
+}
