@@ -1,10 +1,11 @@
 import requests
+import os
 
 owner = "var-github"  # Replace with your GitHub repo owner
 repo = "var-github.github.io"    # Replace with your repo name
 workflow_file = "keep_app_up.yaml"  # Your workflow file name
 branch = "main"  # Branch to trigger the workflow on
-token = "TOKEN"  # Your GitHub PAT
+token = os.environ.get("access_token")  # Your GitHub PAT
 
 url = f"https://api.github.com/repos/{owner}/{repo}/actions/workflows/{workflow_file}/dispatches"
 
