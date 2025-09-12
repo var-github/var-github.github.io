@@ -1,6 +1,6 @@
 <details>
-<summary>Creating serverless function that can be called via POST method</summary>
-
+<summary><span style="color:blue">Creating serverless function that can be called via POST method</span></summary>
+<br>
 We are creating a serverless function called call_workflow.js
 To do this create new project in vercel - choose repo
 
@@ -36,6 +36,7 @@ To send some message along with status
 </details>
 
 <details>
-<summary>Running a github workflow programatically</summary>
+<summary><span style="color:blue">Running a github workflow programatically</span></summary>
+<br>
 
 </details>
