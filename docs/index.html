@@ -19,16 +19,15 @@
         <aside tabindex="0">
             <span class="material-symbols-outlined panel-icon">auto_awesome_mosaic</span>
             <div class="panel-title">Choose Project</div>
-            <ul>
+            <ul id="project-list"></ul>
+            <!-- We need to create <li> tags using js
                 <li><button class="active" onclick="changeProject(0,this)">Sudoku Solver</button></li>
                 <li><button onclick="changeProject(1,this)">Chatbot</button></li>
                 <li><button onclick="changeProject(2,this)">Translator</button></li>
-            </ul>
+            -->
         </aside>
         <main>
-            <iframe class="active" src="https://varun-sudoku-solver.streamlit.app/?embed=true" title="Sudoku Solver"></iframe>
-            <iframe src="https://varun-acm-gen-ai-project.streamlit.app/?embed=true" title="Chatbot"></iframe>
-            <iframe src="https://acmtranslator.streamlit.app/?embed=true" title="Translator"></iframe>
+            <div id="iframe-container"></div>
             <button id="prev-project" class="nav-button" title="Previous Project">
                 <span class="material-symbols-outlined">arrow_cool_down</span>
             </button>
@@ -46,6 +45,39 @@
         </main>
     </section>
     <script>
+        const projects = [
+          { name: "Sudoku Solver", url: "https://varun-sudoku-solver.streamlit.app/?embed=true" },
+          { name: "Chatbot", url: "https://varun-acm-gen-ai-project.streamlit.app/?embed=true" },
+          { name: "Translator", url: "https://acmtranslator.streamlit.app/?embed=true" }
+        ];
+        
+        function createProjectElements() {
+          const list = document.getElementById('project-list');
+          const iframeContainer = document.getElementById('iframe-container');
+          list.innerHTML = '';
+          iframeContainer.innerHTML = '';
+        
+          projects.forEach(({name, url}, index) => {
+            // Add sidebar buttons
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.textContent = name;
+            btn.onclick = function() { changeProject(index, btn); };
+            if (index === 0) btn.classList.add('active');
+            li.appendChild(btn);
+            list.appendChild(li);
+        
+            // Create iframe
+            const iframe = document.createElement('iframe');
+            iframe.src = url;
+            if (index === 0) iframe.classList.add('active');
+            iframeContainer.appendChild(iframe);
+          });
+        }
+        
+        // Call this once on DOM ready
+        document.addEventListener('DOMContentLoaded', createProjectElements);
+        
         // Tab switching
         function show(id, btn) {
             // Using ternary operator - (condition ? expressionIfTrue : expressionIfFalse;)
