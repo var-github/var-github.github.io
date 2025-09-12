@@ -1,3 +1,4 @@
+import sys
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -28,13 +29,11 @@ def automate_website(url):
         driver.quit()
 
 if __name__ == "__main__":
-    urls = [
-        "https://varun-sudoku-solver.streamlit.app/",
-        "https://lane-detection.streamlit.app/",
-        "https://acmtranslator.streamlit.app/"
-    ]
-
+    urls = eval(sys.argv[1]) if len(sys.argv) > 1 else []
+    print(urls)
+    """
     with ThreadPoolExecutor(max_workers=len(urls)) as executor:
         executor.map(automate_website, urls)
+    """
 
     print("Automation complete on all URLs.")
