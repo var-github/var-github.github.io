@@ -25,10 +25,7 @@ All your code should be inside this function
 export default async function handler(req, res) {
 }
 ```
-Your entire code will be called by a POST method, therefore to set status use
-
-res.status(200) or res.status(500)
-
+Your entire code will be called by a POST method, therefore to set status after run, use
+- **res.status(200) or res.status(500)**
 To send some message along with status
-
-res.status(200).json(\<Pass any json data here>);
+- **res.status(200).json(\<Pass any json data here>);**
