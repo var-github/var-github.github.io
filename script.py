@@ -30,10 +30,8 @@ def automate_website(url):
 
 if __name__ == "__main__":
     urls = eval(sys.argv[1]) if len(sys.argv) > 1 else []
-    print(urls)
-    """
+    
     with ThreadPoolExecutor(max_workers=len(urls)) as executor:
         executor.map(automate_website, urls)
-    """
 
     print("Automation complete on all URLs.")
