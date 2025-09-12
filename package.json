@@ -1,8 +1,4 @@
 {
-  "name": "vercel-serverless-api",
-  "version": "1.0.0",
-  "main": "api/call_workflow.js",
-  "scripts": {
-    "start": "node api/call_workflow.js"
-  }
+  "name": "serverless-functions-only",
+  "version": "1.0.0"
 }
