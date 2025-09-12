@@ -76,4 +76,6 @@ const response = await fetch(url, {
   body: JSON.stringify(data)
 });
 ```
+
+Finally set response status to complete API call
 </details>
