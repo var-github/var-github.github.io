@@ -6,7 +6,6 @@
 </details>
 <details>
 <summary><code>Hosting a serverless function to call workflow programmatically</code></summary>
-Read more at [api/readme.md](api/readme.md)
   
-[var-github.github.io/api](https://github.com/var-github/var-github.github.io/tree/main/api)
+Read more at [var-github.github.io/api](https://github.com/var-github/var-github.github.io/tree/main/api)
 </details>
