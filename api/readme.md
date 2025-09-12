@@ -43,11 +43,11 @@ After succesfully deploying, you can now call your serverless function by sendin
 First create a GitHub workflow, which runs on 'workflow_dispatch'
 
 You need to create a Personal Access Token
-- Settings
+- Go to Settings
 - Developer settings
 - Personal access tokens (choose - Tokens (classic))
-- Generate new token, give acces to all repos and workflows
-- Copy acces token
+- Generate new token, give access to all repos and workflows
+- Copy access token
 
 ```
 https://api.github.com/repos/<repo owner>/<repo name>/actions/workflows/<workflowFile name>/dispatches
