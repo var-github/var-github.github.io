@@ -26,8 +26,7 @@
                 <li><button onclick="changeProject(2,this)">Translator</button></li>
             -->
         </aside>
-        <main>
-            <div id="iframe-container"></div>
+        <main id="iframe-container">
             <button id="prev-project" class="nav-button" title="Previous Project">
                 <span class="material-symbols-outlined">arrow_cool_down</span>
             </button>
@@ -55,7 +54,6 @@
           const list = document.getElementById('project-list');
           const iframeContainer = document.getElementById('iframe-container');
           list.innerHTML = '';
-          iframeContainer.innerHTML = '';
         
           projects.forEach(({name, url}, index) => {
             // Add sidebar buttons
@@ -71,7 +69,7 @@
             const iframe = document.createElement('iframe');
             iframe.src = url;
             if (index === 0) iframe.classList.add('active');
-            iframeContainer.appendChild(iframe);
+            iframeContainer.prepend(iframe);
           });
         }
         
