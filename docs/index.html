@@ -74,8 +74,10 @@
         }
 
         (async () => {
-          const response = await fetch('https://var-github-projects.vercel.app/api/call_workflow');
-          createProjectElements();
+          fetch('https://var-github-projects.vercel.app/api/call_workflow')
+            .then(response => {
+              createProjectElements();
+            });
         })();
         
         // Tab switching
