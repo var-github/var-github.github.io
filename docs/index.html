@@ -47,12 +47,6 @@
         </main>
     </section>
     <script>
-        const projects = [
-          { name: "Sudoku Solver", url: "https://varun-sudoku-solver.streamlit.app/?embed=true" },
-          { name: "Chatbot", url: "https://varun-acm-gen-ai-project.streamlit.app/?embed=true" },
-          { name: "Translator", url: "https://acmtranslator.streamlit.app/?embed=true" }
-        ];
-        
         function createProjectElements() {
             // Show loading symbol
             const loadingOverlay = document.getElementById('loading-overlay');
@@ -71,14 +65,14 @@
                       "Translator" : "LINK"
                 }*/
                 // Takes every key, value pair and converts to { name: "Sudoku Solver", url: "LINK" } form
-                const projectsArray = Object.entries(json).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
+                const projects = Object.entries(json).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
                 /* Final format
                 [
                       { name: "Sudoku Solver", url: "LINK" },
                       { name: "Chatbot", url: "LINK" },
                       { name: "Translator", url: "LINK" }
                 ]*/
-                console.log(projectsArray);
+                
                 // Call API to initiate workflow (this workflow keeps the streamlit apps up)
                 fetch('https://var-github-projects.vercel.app/api/call_workflow')
                 .finally(() => {
