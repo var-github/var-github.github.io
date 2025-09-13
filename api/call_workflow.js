@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+async function handler(req, res) {
   const owner = "var-github";  // GitHub repo owner
   const repo = "var-github.github.io";  // Repo name
   const workflowFile = "keep_app_up.yaml";  // Workflow file name
@@ -57,6 +57,6 @@ export default async function handler(req, res) {
   if (!foundRun) {
     return res.status(408).json({error: "Workflow run did not complete in the timeout period"});
   }
-
   res.status(200).json({message: 'Workflow completed'});
 }
+module.exports = handler;
