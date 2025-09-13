@@ -58,11 +58,10 @@
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.style.display = 'flex';
             
-            fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/project_to_display.json')
+            fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json')
               .then(res => res.json())
               .then(data => {
-                console.log(data.encoding);
-                const content = atob(data.content.replace(/\n/g, "")); // decode base64 to string
+                const content = atob(data.content); // decode base64 to string
                 const json = JSON.parse(content);
                 console.log(json);
               })
