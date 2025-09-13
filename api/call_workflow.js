@@ -5,7 +5,22 @@ async function handler(req, res) {
   const branch = "main";  // Branch to trigger the workflow on
   const token = process.env.access_token;  // GitHub PAT access token
 
-  let url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
+  const runsUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
+  const dispatchUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
+  
+  // Get latest workflow run time
+  let latestRunTime = null;
+  const runsResp = await fetch(runsUrl, { headers });
+  const runsData = await runsResp.json();
+  latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
+      
+  // Check if enough time has elapsed (30 minutes)
+  const lastRunDate = new Date(latestRunTime);
+  const now = new Date();
+  const diffMinutes = (now - lastRunDate) / (1000 * 60);
+  if (diffMinutes < 30) {
+    return res.status(200).json({message: 'Workflow triggered recently'});
+  }
 
   const headers = {
     "Accept": "application/vnd.github+json",
@@ -21,22 +36,14 @@ async function handler(req, res) {
   };
 
   // Run workflow
-  const dispatchResp = await fetch(url, {
+  const dispatchResp = await fetch(dispatchUrl, {
     method: 'POST',
     headers,
     body: JSON.stringify(data)
   });
 
-  if (dispatchResp.status !== 204) {
-    const errorText = await dispatchResp.text();
-    return res.status(dispatchResp.status).json({ error: errorText });
-  }
-
   // Wait until workflow finished running
   await new Promise(r => setTimeout(r, 15000));
-
-  // URL to get workflow runs
-  url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
   let pollAttempts = 0;
   const maxPoll = 20; // Wait up to 100 seconds (20 x 5s)
 
@@ -44,7 +51,7 @@ async function handler(req, res) {
 
   while (pollAttempts < maxPoll) {
     pollAttempts++;
-    const runsResp = await fetch(url, { headers });    
+    const runsResp = await fetch(runsUrl, { headers });    
     const runsData = await runsResp.json();
     // check status of latest run
     if (runsData.workflow_runs[0].status == "completed") {
