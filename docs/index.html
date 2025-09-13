@@ -52,7 +52,7 @@
         
         function createProjectElements() {
             fetch('https://var-github-projects.vercel.app/api/call_workflow')
-              .then(response => {
+              .finally(() => {
                   const list = document.getElementById('project-list');
                   const iframeContainer = document.getElementById('iframe-container');
                   list.innerHTML = '';
