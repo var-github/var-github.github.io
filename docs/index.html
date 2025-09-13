@@ -47,64 +47,58 @@
         </main>
     </section>
     <script>
-        function createProjectElements() {
+        async function createProjectElements() {
             // Show loading symbol
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.style.display = 'flex';
-
+            
             // Get projects to display
-            fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json')
-              .then(res => res.json())
-              .then(data => {
-                // atob - decodes base64 to string
-                const json = JSON.parse(atob(data.content));
-                /*This is the format of json
-                {
-                      "Sudoku Solver" : "LINK",
-                      "Chatbot" : "LINK",
-                      "Translator" : "LINK"
-                }*/
-                // Takes every key, value pair and converts to { name: "Sudoku Solver", url: "LINK" } form
-                const projects = Object.entries(json).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
-                /* Final format
-                [
-                      { name: "Sudoku Solver", url: "LINK" },
-                      { name: "Chatbot", url: "LINK" },
-                      { name: "Translator", url: "LINK" }
-                ]*/
-              })
+            const res = await fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json');
+            let data = await res.json();
+            // atob - decodes base64 to string
+            data = JSON.parse(atob(data.content));
+            /*This is the format of data
+              {
+                    "Sudoku Solver" : "LINK",
+                    "Chatbot" : "LINK",
+                    "Translator" : "LINK"
+            }*/
+            // Takes every key, value pair and converts to { name: "Sudoku Solver", url: "LINK" } form
+            const projects = Object.entries(data).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
+            /* Final format
+            [
+                  { name: "Sudoku Solver", url: "LINK" },
+                  { name: "Chatbot", url: "LINK" },
+                  { name: "Translator", url: "LINK" }
+            ]*/
 
             // Call API to initiate workflow (this workflow keeps the streamlit apps up)
-            fetch('https://var-github-projects.vercel.app/api/call_workflow')
-              .finally(() => {
-                  const list = document.getElementById('project-list');
-                  const iframeContainer = document.getElementById('iframe-container');
-                  list.innerHTML = '';
-                
-                  projects.forEach(({name, url}, index) => {
-                    // Add sidebar buttons
-                    const li = document.createElement('li');
-                    const btn = document.createElement('button');
-                    btn.textContent = name;
-                    btn.onclick = function() { changeProject(index, btn); };
-                    if (index === 0) btn.classList.add('active');
-                    li.appendChild(btn);
-                    list.appendChild(li);
-                
-                    // Create iframe
-                    const iframe = document.createElement('iframe');
-                    iframe.src = url;
-                    if (index === 0) iframe.classList.add('active');
-                    iframeContainer.appendChild(iframe);
-                  });
+            await fetch('https://var-github-projects.vercel.app/api/call_workflow');
+            // Create iframes and navigation buttons
+            const list = document.getElementById('project-list');
+            const iframeContainer = document.getElementById('iframe-container');
+            list.innerHTML = '';
+        
+            projects.forEach(({name, url}, index) => {
+                // Add sidebar buttons
+                const li = document.createElement('li');
+                const btn = document.createElement('button');
+                btn.textContent = name;
+                btn.onclick = function() { changeProject(index, btn); };
+                if (index === 0) btn.classList.add('active');
+                li.appendChild(btn);
+                list.appendChild(li);
+        
+                // Create iframe
+                const iframe = document.createElement('iframe');
+                iframe.src = url;
+                if (index === 0) iframe.classList.add('active');
+                iframeContainer.appendChild(iframe);
+            });
 
-                  // Wait 5 secs for iframe to load
-                  (async () => {
-                    await new Promise(resolve => setTimeout(resolve, 5000));
-                    // Hide loading symbol
-                    loadingOverlay.style.display = 'none';
-                  })();
-              });          
+            // Wait 5 seconds for iframe loading
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            loadingOverlay.style.display = 'none';        
         }
 
         document.addEventListener('DOMContentLoaded', createProjectElements);
