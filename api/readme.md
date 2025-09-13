@@ -8,7 +8,7 @@ To do this create new project in vercel - choose repo
 - Leave build command and output directory empty
 - Add any envirnment secrets you want to add and deploy
 
-If you are using any packages, you need to create package.json
+If you are using any js packages, you need to create package.json
 
 Structure of package.json if required
 ```
@@ -25,8 +25,10 @@ Structure of package.json if required
 
 All your code should be inside this function
 ```
-export default async function handler(req, res) {
+async function handler(req, res) {
+   // Code to be executed comes here
 }
+module.exports = handler;
 ```
 Your entire code will be called by a POST method, therefore to set status after run, use
 - **res.status(200) or res.status(500)**
@@ -79,4 +81,8 @@ const response = await fetch(url, {
 ```
 
 Finally set response status to complete API call
+</details>
+<details>
+<summary><code>Explaination of 'call_workflow.js'</code></summary>
+
 </details>
