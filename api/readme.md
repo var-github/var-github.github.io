@@ -80,9 +80,22 @@ const response = await fetch(url, {
 });
 ```
 
+This call runs the github workflow
 Finally set response status to complete API call
 </details>
 <details>
 <summary><code>Explaination of 'call_workflow.js'</code></summary>
+<br>
+In my case, I am using the workflow to keep streamlit apps up. Streamlit apps dont go down until 3 hours of inactivity, since we dont want to run workflow on every refresh - poll the last time the workflow ran.
 
+If workflow ran more than 3 hours ago only then run new instance of workflow
+```
+const runsUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
+// Get latest workflow run time
+let latestRunTime = null;
+const runsResp = await fetch(runsUrl, { headers });
+const runsData = await runsResp.json();
+latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
+const lastRunDate = new Date(latestRunTime);
+```
 </details>
