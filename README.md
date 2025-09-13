@@ -18,5 +18,6 @@ To create a github workflow, first create a .yaml file in .github/workflows. In 
 <details>
 <summary><code>Hosting a serverless function to call workflow programmatically</code></summary>
 <br>
+
 Read more at [var-github.github.io/api](https://github.com/var-github/var-github.github.io/tree/main/api)
 </details>
