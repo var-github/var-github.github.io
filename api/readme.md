@@ -99,4 +99,29 @@ const runsData = await runsResp.json();
 latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
 const lastRunDate = new Date(latestRunTime);
 ```
+Now compare with current time and decide weather to run workflow
+<br>
+**Run workflow as per syntax given above**
+<br>
+Now we want to wait till workflow finished running, so that we can send completed response to API call
+```
+// Wait until workflow finished running
+await new Promise(r => setTimeout(r, 15000));
+let pollAttempts = 0;
+const maxPoll = 20; // Wait up to 100 seconds (20 x 5s)
+
+let foundRun = false;
+
+while (pollAttempts < maxPoll) {
+  pollAttempts++;
+  const runsResp = await fetch(runsUrl, { headers });    
+  const runsData = await runsResp.json();
+  // check status of latest run
+  if (runsData.workflow_runs[0].status == "completed") {
+    foundRun = true;
+    break;
+  }
+  await new Promise(r => setTimeout(r, 5000));
+}
+```
 </details>
