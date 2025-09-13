@@ -1,4 +1,3 @@
-import sys
 import json
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -30,11 +29,9 @@ def automate_website(url):
         driver.quit()
 
 if __name__ == "__main__":
-    urls = eval(sys.argv[1]) if len(sys.argv) > 1 else []
-
     with open('projects_to_display.json', 'r') as file:
-        data = list(json.load(file).values())
-        print(data)
+        urls = list(json.load(file).values())
+        print(urls)
     
     with ThreadPoolExecutor(max_workers=len(urls)) as executor:
         executor.map(automate_website, urls)
