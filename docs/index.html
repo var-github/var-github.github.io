@@ -57,16 +57,31 @@
             // Show loading symbol
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.style.display = 'flex';
-            
+
+            // Get projects to display
             fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json')
               .then(res => res.json())
               .then(data => {
-                const content = atob(data.content); // decode base64 to string
-                const json = JSON.parse(content);
-                console.log(json);
+                // atob - decodes base64 to string
+                const json = JSON.parse(atob(data.content));
+                /*This is the format of json
+                {
+                      "Sudoku Solver" : "LINK",
+                      "Chatbot" : "LINK",
+                      "Translator" : "LINK"
+                }*/
+                // Takes every key, value pair and converts to { name: "Sudoku Solver", url: "LINK" } form
+                const projectsArray = Object.entries(json).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
+                /* Final format
+                [
+                      { name: "Sudoku Solver", url: "LINK" },
+                      { name: "Chatbot", url: "LINK" },
+                      { name: "Translator", url: "LINK" }
+                ]*/
+                console.log(projectsArray);
               })
 
-            
+            // Call API to initiate workflow (this workflow keeps the streamlit apps up)
             fetch('https://var-github-projects.vercel.app/api/call_workflow')
               .finally(() => {
                   const list = document.getElementById('project-list');
