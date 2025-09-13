@@ -51,26 +51,29 @@
         ];
         
         function createProjectElements() {
-          const list = document.getElementById('project-list');
-          const iframeContainer = document.getElementById('iframe-container');
-          list.innerHTML = '';
-        
-          projects.forEach(({name, url}, index) => {
-            // Add sidebar buttons
-            const li = document.createElement('li');
-            const btn = document.createElement('button');
-            btn.textContent = name;
-            btn.onclick = function() { changeProject(index, btn); };
-            if (index === 0) btn.classList.add('active');
-            li.appendChild(btn);
-            list.appendChild(li);
-        
-            // Create iframe
-            const iframe = document.createElement('iframe');
-            iframe.src = url;
-            if (index === 0) iframe.classList.add('active');
-            iframeContainer.appendChild(iframe);
-          });
+            fetch('https://var-github-projects.vercel.app/api/call_workflow')
+              .finally(() => {
+                  const list = document.getElementById('project-list');
+                  const iframeContainer = document.getElementById('iframe-container');
+                  list.innerHTML = '';
+                
+                  projects.forEach(({name, url}, index) => {
+                    // Add sidebar buttons
+                    const li = document.createElement('li');
+                    const btn = document.createElement('button');
+                    btn.textContent = name;
+                    btn.onclick = function() { changeProject(index, btn); };
+                    if (index === 0) btn.classList.add('active');
+                    li.appendChild(btn);
+                    list.appendChild(li);
+                
+                    // Create iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    if (index === 0) iframe.classList.add('active');
+                    iframeContainer.appendChild(iframe);
+                  });
+              });          
         }
 
         document.addEventListener('DOMContentLoaded', createProjectElements);
