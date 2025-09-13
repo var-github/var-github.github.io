@@ -100,13 +100,13 @@ latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
 const lastRunDate = new Date(latestRunTime);
 ```
 Now compare with current time and decide weather to run workflow
+
 <br>
 **Run workflow as per syntax given above**
+
 <br>
-Now we want to wait till workflow finished running, so that we can send completed response to API call
+Now we want to wait till workflow finished running, so that we can send completed response to API call. To do this periodically call Github API and check if run status == "completed"
 ```
-// Wait until workflow finished running
-await new Promise(r => setTimeout(r, 15000));
 let pollAttempts = 0;
 const maxPoll = 20; // Wait up to 100 seconds (20 x 5s)
 
