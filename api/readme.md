@@ -91,10 +91,11 @@ In my case, I am using the workflow to keep streamlit apps up. Streamlit apps do
 If workflow ran more than 3 hours ago only then run new instance of workflow
 ```
 const runsUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
-// Get latest workflow run time
+
 let latestRunTime = null;
 const runsResp = await fetch(runsUrl, { headers });
 const runsData = await runsResp.json();
+
 latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
 const lastRunDate = new Date(latestRunTime);
 ```
