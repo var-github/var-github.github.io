@@ -103,7 +103,7 @@ Now compare with current time and decide weather to run workflow
 
 <br>
 
-**Run workflow as per syntax given above**
+<u>**Run workflow as per syntax given above**</u>
 
 <br>
 
