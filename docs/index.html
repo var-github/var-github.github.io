@@ -61,7 +61,8 @@
             fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/project_to_display.json')
               .then(res => res.json())
               .then(data => {
-                const content = atob(data.content); // decode base64 to string
+                console.log(data.encoding);
+                const content = atob(data.content.replace(/\n/g, "")); // decode base64 to string
                 const json = JSON.parse(content);
                 console.log(json);
               })
