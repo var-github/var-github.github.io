@@ -7,6 +7,19 @@ async function handler(req, res) {
 
   const runsUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
   const dispatchUrl = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
+
+  const headers = {
+    "Accept": "application/vnd.github+json",
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json"
+  };
+
+  const data = {
+    ref: branch,
+    inputs: {
+      urls: '["https://varun-sudoku-solver.streamlit.app/", "https://lane-detection.streamlit.app/", "https://acmtranslator.streamlit.app/", "https://varun-acm-gen-ai-project.streamlit.app"]'
+    }
+  };
   
   // Get latest workflow run time
   let latestRunTime = null;
@@ -21,19 +34,6 @@ async function handler(req, res) {
   if (diffMinutes < 30) {
     return res.status(200).json({message: 'Workflow triggered recently'});
   }
-
-  const headers = {
-    "Accept": "application/vnd.github+json",
-    "Authorization": `Bearer ${token}`,
-    "Content-Type": "application/json"
-  };
-
-  const data = {
-    ref: branch,
-    inputs: {
-      urls: '["https://varun-sudoku-solver.streamlit.app/", "https://lane-detection.streamlit.app/", "https://acmtranslator.streamlit.app/", "https://varun-acm-gen-ai-project.streamlit.app"]'
-    }
-  };
 
   // Run workflow
   const dispatchResp = await fetch(dispatchUrl, {
