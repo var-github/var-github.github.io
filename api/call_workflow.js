@@ -15,11 +15,17 @@ async function handler(req, res) {
   };
 
   const data = {
+    ref: branch
+  };
+
+  /* If you want to pass any input to github workflow
+  const data = {
     ref: branch,
     inputs: {
-      urls: '["https://varun-sudoku-solver.streamlit.app/", "https://lane-detection.streamlit.app/", "https://acmtranslator.streamlit.app/", "https://varun-acm-gen-ai-project.streamlit.app"]'
+      urls: 'DATA TO PASS'
     }
   };
+  */
   
   // Get latest workflow run time
   let latestRunTime = null;
