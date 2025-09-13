@@ -190,3 +190,24 @@ iframe.active {
     opacity: 1;
     transition: opacity 0.2s;
 }
+#loading-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  backdrop-filter: blur(5px);
+  background: rgba(255,255,255,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.spinner {
+  width: 60px; height: 60px;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
