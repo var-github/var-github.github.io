@@ -3,17 +3,22 @@ name: wake up apps
 
 # When to run this workflow - 'push': runs whenever code is pushed/committed to this repo
 # 'workflow_dispatch': Manually through GitHub UI button
-# 'schedule': as per some schedule
-on: 
-  workflow_dispatch:
-    inputs:
-      # Name of input variable is urls
-      urls:
-        description: 'List of websites to keep active'
-        required: true
-        default: '[]'
-        # If type not mentioned takes it as string default
-        # type: string, boolean, number, choice (can choose from dropdown)
+# 'schedule': as per some schedule (time based)
+
+on: workflow_dispatch
+
+# If you want to take input change code
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       urls:
+#         description: 'List of websites to keep active'
+#         required: true
+#         default: '[]'
+
+# urls is name of variable
+# If type not mentioned takes it as string default
+# type: string, boolean, number, choice (can choose from dropdown)
 
 # Create a job called run-script, and make sure it runs on latest ubuntu
 jobs:
@@ -38,6 +43,9 @@ jobs:
     - name: Install ChromeDriver
       uses: nanasess/setup-chromedriver@v2
     
-    # Runs code and passes string as command line argument
+    # Runs python code
     - name: Run Python code
-      run: python script.py '${{ github.event.inputs.urls }}'
+      run: python script.py
+
+# If you want to pass input to python code as commandline argument
+# run: python script.py '${{ github.event.inputs.urls }}'
