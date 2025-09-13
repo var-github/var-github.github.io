@@ -5,7 +5,7 @@ async function handler(req, res) {
   const branch = "main";  // Branch to trigger the workflow on
   const token = process.env.access_token;  // GitHub PAT access token
 
-  const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
+  let url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/dispatches`;
 
   const headers = {
     "Accept": "application/vnd.github+json",
@@ -36,7 +36,7 @@ async function handler(req, res) {
   await new Promise(r => setTimeout(r, 15000));
 
   // URL to get workflow runs
-  const url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
+  url = `https://api.github.com/repos/${owner}/${repo}/actions/workflows/${workflowFile}/runs?branch=${branch}`;
   let pollAttempts = 0;
   const maxPoll = 20; // Wait up to 100 seconds (20 x 5s)
 
