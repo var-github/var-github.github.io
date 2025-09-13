@@ -33,7 +33,7 @@ if __name__ == "__main__":
     urls = eval(sys.argv[1]) if len(sys.argv) > 1 else []
 
     with open('projects_to_display.json', 'r') as file:
-        data = json.load(file)
+        data = list(json.load(file).values())
         print(data)
     
     with ThreadPoolExecutor(max_workers=len(urls)) as executor:
