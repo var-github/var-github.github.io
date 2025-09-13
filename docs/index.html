@@ -84,9 +84,9 @@
                   // Wait 1 sec for iframe to load
                   (async () => {
                     await new Promise(resolve => setTimeout(resolve, 3000));
+                    // Hide loading symbol
+                    loadingOverlay.style.display = 'none';
                   })();
-                  // Hide loading symbol
-                  loadingOverlay.style.display = 'none';
               });          
         }
 
