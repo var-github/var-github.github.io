@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+    <div id="loading-overlay" style="display:none;">
+        <div class="spinner"></div>
+    </div>
     <nav>
         <button class="active" onclick="show('projects',this)">Projects</button>
         <button onclick="show('aboutme',this)">About Me</button>
@@ -51,6 +54,10 @@
         ];
         
         function createProjectElements() {
+            // Show loading symbol
+            const loadingOverlay = document.getElementById('loading-overlay');
+            loadingOverlay.style.display = 'flex';
+            
             fetch('https://var-github-projects.vercel.app/api/call_workflow')
               .finally(() => {
                   const list = document.getElementById('project-list');
@@ -73,6 +80,13 @@
                     if (index === 0) iframe.classList.add('active');
                     iframeContainer.appendChild(iframe);
                   });
+
+                  // Wait 1 sec for iframe to load
+                  (async () => {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                  })();
+                  // Hide loading symbol
+                  loadingOverlay.style.display = 'none';
               });          
         }
 
