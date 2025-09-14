@@ -33,11 +33,11 @@ async function handler(req, res) {
   const runsData = await runsResp.json();
   latestRunTime = runsData.workflow_runs[0].created_at;  // ISO8601 string
       
-  // Check if enough time has elapsed (30 minutes)
+  // Check if enough time has elapsed (10 hours)
   const lastRunDate = new Date(latestRunTime);
   const now = new Date();
   const diffMinutes = (now - lastRunDate) / (1000 * 60);
-  if (diffMinutes < 180) {
+  if (diffMinutes < 600) {
     return res.status(200).json({message: 'Workflow triggered recently'});
   }
 
