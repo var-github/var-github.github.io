@@ -219,4 +219,5 @@ iframe.active {
     font-size: 25px;
     font-family:sans-serif;
     z-index:10000;
+    background: none;
 }
