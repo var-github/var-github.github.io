@@ -108,8 +108,6 @@
                 }, 3500);
                 
                 fretchPromise.finally(() => {
-                    clearTimeout(delayTimer);
-                    stopCountdown();
                     const list = document.getElementById('project-list');
                     const iframeContainer = document.getElementById('iframe-container');
                     list.innerHTML = '';
@@ -131,6 +129,9 @@
                         iframeContainer.appendChild(iframe);
                     });
 
+                    clearTimeout(delayTimer);
+                    stopCountdown();
+                    
                     // Wait 3 secs for iframe to load
                     (async () => {
                         await new Promise(resolve => setTimeout(resolve, 3000));
