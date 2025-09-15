@@ -105,9 +105,10 @@
                 // Set 5-second delay timer to start countdown
                 const delayTimer = setTimeout(() => {
                     startCountdown();
-                }, 3500);
+                }, 2000);
                 
                 fretchPromise.finally(() => {
+                    clearTimeout(delayTimer);
                     const list = document.getElementById('project-list');
                     const iframeContainer = document.getElementById('iframe-container');
                     list.innerHTML = '';
@@ -128,14 +129,12 @@
                         if (index === 0) iframe.classList.add('active');
                         iframeContainer.appendChild(iframe);
                     });
-
-                    clearTimeout(delayTimer);
-                    stopCountdown();
                     
                     // Wait 3 secs for iframe to load
                     (async () => {
                         await new Promise(resolve => setTimeout(resolve, 3000));
-                        // Hide loading symbol
+                        // Hide loading symbol and timer
+                        stopCountdown();
                         loadingOverlay.style.display = 'none';
                     })();
                 });
