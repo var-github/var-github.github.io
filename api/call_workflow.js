@@ -40,7 +40,7 @@ async function handler(req, res) {
   const lastRunDate = new Date(latestRunTime);
   const now = new Date();
   const diffMinutes = (now - lastRunDate) / (1000 * 60);
-  if (diffMinutes < 600) {
+  if (diffMinutes < 1) {
     return res.status(200).json({message: 'Workflow triggered recently'});
   }
 
