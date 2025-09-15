@@ -213,10 +213,9 @@ iframe.active {
   100% { transform: rotate(360deg); }
 }
 #timer-display{
-    margin-top:15px;
+    margin-top:20px;
     text-align: center;
     color:#333;
-    border-radius:4px;
     font-family:sans-serif;
     z-index:10000;
 }
