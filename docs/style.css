@@ -211,3 +211,14 @@ iframe.active {
 @keyframes spin {
   100% { transform: rotate(360deg); }
 }
+#timer-display{
+    position: relative;
+    top: 50px;
+    left: -50px;
+    text-align: center;
+    background:#333;
+    color:#fff;
+    border-radius:4px;
+    font-family:sans-serif;
+    z-index:10000;
+}
