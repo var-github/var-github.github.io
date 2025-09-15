@@ -215,7 +215,8 @@ iframe.active {
 #timer-display{
     margin-top:20px;
     text-align: center;
-    color:#333;
+    color:#4f4b3b;
+    font-size: 25px;
     font-family:sans-serif;
     z-index:10000;
 }
