@@ -49,6 +49,11 @@
     </section>
     <script>
         function createProjectElements() {
+            // Get projects to display
+            let projectsFetch = fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json');
+            // Run workflow to wake up apps
+            let workflowFetch = fetch('https://var-github-projects.vercel.app/api/call_workflow');
+            
             // Show loading symbol
             const loadingOverlay = document.getElementById('loading-overlay');
             loadingOverlay.style.display = 'flex';
@@ -78,10 +83,17 @@
                 timerDisplay.style.display = 'none';
             }
 
-            // Get projects to display
-            fetch('https://api.github.com/repos/var-github/var-github.github.io/contents/projects_to_display.json')
-            .then(res => res.json())
-            .then(data => {
+            // Set 2-second delay timer to start countdown
+            const delayTimer = setTimeout(() => {
+                startCountdown();
+            }, 2000);
+
+            // Wait for both fetches to resolve
+            Promise.all([projectsFetch, workflowFetch])
+            .then(async ([projectsRes, workflowRes]) => {
+                clearTimeout(delayTimer);
+
+                const data = await projectsRes.json();
                 // atob - decodes base64 to string
                 const json = JSON.parse(atob(data.content));
                 /*This is the format of json
@@ -91,53 +103,39 @@
                       "Translator" : "LINK"
                 }*/
                 // Takes every key, value pair and converts to { name: "Sudoku Solver", url: "LINK" } form
-                const projects = Object.entries(json).map(([name, url]) => ({name: name, url: url + "?embed=true"}));
+                const projects = Object.entries(json).map(([name, url]) => ({ name, url: url + "?embed=true" }));
                 /* Final format
                 [
                       { name: "Sudoku Solver", url: "LINK" },
                       { name: "Chatbot", url: "LINK" },
                       { name: "Translator", url: "LINK" }
                 ]*/
-                
-                // Call API to initiate workflow (this workflow keeps the streamlit apps up)
-                let fretchPromise = fetch('https://var-github-projects.vercel.app/api/call_workflow')
+                const list = document.getElementById('project-list');
+                const iframeContainer = document.getElementById('iframe-container');
+                list.innerHTML = '';
 
-                // Set 5-second delay timer to start countdown
-                const delayTimer = setTimeout(() => {
-                    startCountdown();
-                }, 2000);
-                
-                fretchPromise.finally(() => {
-                    clearTimeout(delayTimer);
-                    const list = document.getElementById('project-list');
-                    const iframeContainer = document.getElementById('iframe-container');
-                    list.innerHTML = '';
+                projects.forEach(({name, url}, index) => {
+                    // Add sidebar buttons
+                    const li = document.createElement('li');
+                    const btn = document.createElement('button');
+                    btn.textContent = name;
+                    btn.onclick = function() { changeProject(index, btn); };
+                    if (index === 0) btn.classList.add('active');
+                    li.appendChild(btn);
+                    list.appendChild(li);
 
-                    projects.forEach(({name, url}, index) => {
-                        // Add sidebar buttons
-                        const li = document.createElement('li');
-                        const btn = document.createElement('button');
-                        btn.textContent = name;
-                        btn.onclick = function() { changeProject(index, btn); };
-                        if (index === 0) btn.classList.add('active');
-                        li.appendChild(btn);
-                        list.appendChild(li);
-
-                        // Create iframe
-                        const iframe = document.createElement('iframe');
-                        iframe.src = url;
-                        if (index === 0) iframe.classList.add('active');
-                        iframeContainer.appendChild(iframe);
-                    });
-                    
-                    // Wait 3 secs for iframe to load
-                    (async () => {
-                        await new Promise(resolve => setTimeout(resolve, 3000));
-                        // Hide loading symbol and timer
-                        stopCountdown();
-                        loadingOverlay.style.display = 'none';
-                    })();
+                    // Create iframe
+                    const iframe = document.createElement('iframe');
+                    iframe.src = url;
+                    if (index === 0) iframe.classList.add('active');
+                    iframeContainer.appendChild(iframe);
                 });
+                
+                // Wait 3 secs for iframe to load
+                await new Promise(resolve => setTimeout(resolve, 3000));
+                // Hide loading symbol and timer
+                stopCountdown();
+                loadingOverlay.style.display = 'none';
             });
         }
 
