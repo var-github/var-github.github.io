@@ -100,14 +100,8 @@
                 ]*/
                 
                 // Call API to initiate workflow (this workflow keeps the streamlit apps up)
-                const fetchWorkflow = fetch('https://var-github-projects.vercel.app/api/call_workflow');
-
-                // Set a 5-second delay timer for showing countdown
-                const delayTimer = setTimeout(() => {
-                  startCountdown();
-                }, 5000);
-                
-                fetchPromise.finally(() => {
+                fetch('https://var-github-projects.vercel.app/api/call_workflow')
+                  .finally(() => {
                     clearTimeout(delayTimer);
                     stopCountdown();
                     
@@ -139,6 +133,11 @@
                         loadingOverlay.style.display = 'none';
                     })();
                 });
+                
+                // Set a 5-second delay timer for showing countdown
+                const delayTimer = setTimeout(() => {
+                  startCountdown();
+                }, 3500);
             });
         }
 
