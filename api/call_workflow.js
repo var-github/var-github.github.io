@@ -1,5 +1,7 @@
 async function handler(req, res) {
+  // Give github webpage to access API without CORS violation
   res.setHeader('Access-Control-Allow-Origin', 'https://var-github.github.io');
+  
   const owner = "var-github";  // GitHub repo owner
   const repo = "var-github.github.io";  // Repo name
   const workflowFile = "keep_app_up.yaml";  // Workflow file name
