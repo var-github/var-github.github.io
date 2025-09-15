@@ -101,8 +101,15 @@
                 
                 // Call API to initiate workflow (this workflow keeps the streamlit apps up)
                 let fretchPromise = fetch('https://var-github-projects.vercel.app/api/call_workflow')
+
+                // Set 5-second delay timer to start countdown
+                const delayTimer = setTimeout(() => {
+                    startCountdown();
+                }, 3500);
                 
                 fretchPromise.finally(() => {
+                    clearTimeout(delayTimer);
+                    stopCountdown();
                     const list = document.getElementById('project-list');
                     const iframeContainer = document.getElementById('iframe-container');
                     list.innerHTML = '';
