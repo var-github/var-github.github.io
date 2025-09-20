@@ -16,7 +16,7 @@ def automate_website(url):
     driver = webdriver.Chrome(options=options)
     driver.get(url)
     try:
-        wait = WebDriverWait(driver, 30)
+        wait = WebDriverWait(driver, 40)
         button = wait.until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, f"button, {LINK_SELECTOR}"))
         )
