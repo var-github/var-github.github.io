@@ -5,7 +5,11 @@ name: wake up apps
 # 'workflow_dispatch': Manually through GitHub UI button
 # 'schedule': as per some schedule (time based)
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+  schedule:
+      - cron: '0 0 */2 * *'
+
 
 # If you want to take input change code
 # on:
